@@ -50,7 +50,6 @@ AppDataSource.initialize()
       AppDataSource.manager.create(User, {
         firstName: "Timber",
         lastName: "Saw",
-        age: 27,
       })
     );
 
@@ -58,7 +57,6 @@ AppDataSource.initialize()
       AppDataSource.manager.create(User, {
         firstName: "Phantom",
         lastName: "Assassin",
-        age: 24,
       })
     );
 
