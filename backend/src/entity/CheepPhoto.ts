@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { Auditable } from "./Auditable";
 
 @Entity()
-export class User extends Auditable {
+export class CheepPhoto extends Auditable {
   @PrimaryGeneratedColumn()
   id: number;
 
