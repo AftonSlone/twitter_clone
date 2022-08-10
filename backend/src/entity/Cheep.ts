@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 import { Auditable } from "./Auditable";
 import { CheepPhoto } from "./CheepPhoto";
+import { Recheep } from "./Recheep";
 import { Reply } from "./Reply";
 import { User } from "./User";
 
@@ -28,5 +29,8 @@ export class Cheep extends Auditable {
   photos: CheepPhoto[];
 
   @OneToMany(() => Reply, (reply) => reply.cheep)
-  replies: Reply[]
+  replies: Reply[];
+
+  @OneToMany(() => Recheep, (recheep) => recheep.cheep)
+  recheeps: Recheep;
 }

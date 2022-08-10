@@ -46,6 +46,8 @@ AppDataSource.initialize()
     app.listen(port);
 
     // insert new users for test
+    await AppDataSource.manager.clear(User);
+
     await AppDataSource.manager.save(
       AppDataSource.manager.create(User, {
         firstName: "Timber",
