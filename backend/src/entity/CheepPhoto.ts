@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, ManyToOne } from "typeorm";
 import { Auditable } from "./Auditable";
+import { Cheep } from "./Cheep";
 
 @Entity()
 export class CheepPhoto extends Auditable {
@@ -7,8 +8,8 @@ export class CheepPhoto extends Auditable {
   id: number;
 
   @Column()
-  cheepId: number;
-
-  @Column()
   photoUrl: string;
+
+  @ManyToOne(() => Cheep, (cheep) => cheep.photos)
+  cheep: Cheep;
 }

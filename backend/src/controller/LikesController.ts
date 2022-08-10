@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
-import LikeRepository from "../repository/LikeRepository";
+import LikesRepository from "../repository/LikesRepository";
 
-export class LikeController {
+export class LikesController {
   async all(request: Request, response: Response, next: NextFunction) {
-    return LikeRepository.find();
+    return LikesRepository.find();
   }
 
   async one(request: Request, response: Response, next: NextFunction) {
-    return LikeRepository.findOne({
+    return LikesRepository.findOne({
       where: {
         id: parseInt(request.params.id),
       },
@@ -15,14 +15,14 @@ export class LikeController {
   }
 
   async save(request: Request, response: Response, next: NextFunction) {
-    return LikeRepository.save(request.body);
+    return LikesRepository.save(request.body);
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {
-    const likeToRemove = await LikeRepository.findOneBy({
+    const likesToRemove = await LikesRepository.findOneBy({
       id: parseInt(request.params.id),
     });
-    if (likeToRemove) throw new Error("This Like was not found");
-    await LikeRepository.remove(likeToRemove);
+    if (likesToRemove) throw new Error("This Likes was not found");
+    await LikesRepository.remove(likesToRemove);
   }
 }

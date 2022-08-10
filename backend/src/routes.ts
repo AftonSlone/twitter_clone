@@ -1,7 +1,7 @@
 import { CheepController } from "./controller/CheepController";
 import { CheepPhotoController } from "./controller/CheepPhotoController";
 import { FollowController } from "./controller/FollowController";
-import { LikeController } from "./controller/LikeController";
+import { LikesController } from "./controller/LikesController";
 import { RecheepController } from "./controller/RecheepController";
 import { ReplyController } from "./controller/ReplyController";
 import { ReplyPhotoController } from "./controller/ReplyPhotoController";
@@ -107,25 +107,25 @@ export const Routes = [
   {
     method: "get",
     route: "/likes",
-    controller: LikeController,
+    controller: LikesController,
     action: "all",
   },
   {
     method: "get",
     route: "/likes/:id",
-    controller: LikeController,
+    controller: LikesController,
     action: "one",
   },
   {
     method: "post",
     route: "/likes",
-    controller: LikeController,
+    controller: LikesController,
     action: "save",
   },
   {
     method: "delete",
     route: "/likes/:id",
-    controller: LikeController,
+    controller: LikesController,
     action: "remove",
   },
   {
