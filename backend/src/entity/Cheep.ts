@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 import { Auditable } from "./Auditable";
 import { CheepPhoto } from "./CheepPhoto";
+import { Reply } from "./Reply";
 import { User } from "./User";
 
 @Entity()
@@ -25,4 +26,7 @@ export class Cheep extends Auditable {
 
   @OneToMany(() => CheepPhoto, (cheepPhoto) => cheepPhoto.cheep)
   photos: CheepPhoto[];
+
+  @OneToMany(() => Reply, (reply) => reply.cheep)
+  replies: Reply[]
 }
