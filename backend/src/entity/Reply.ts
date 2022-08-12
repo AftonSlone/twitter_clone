@@ -13,10 +13,7 @@ import { ReplyPhoto } from "./ReplyPhoto";
 export class Reply extends Auditable {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column()
-  userId: number;
-
+  
   @Column()
   content: string;
 

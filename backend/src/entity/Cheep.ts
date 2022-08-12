@@ -15,10 +15,7 @@ import { User } from "./User";
 export class Cheep extends Auditable {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column()
-  userId: number;
-
+  
   @Column()
   content: string;
 

@@ -9,7 +9,4 @@ export class Likes extends Auditable {
 
   @ManyToOne(() => User, (user) => user.likes)
   user: User
-
-  @Column()
-  userId: number;
 }

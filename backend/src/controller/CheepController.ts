@@ -1,9 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import CheepRepository from "../repository/CheepRepository";
+import UserRepository from "../repository/UserRepository";
 
 export class CheepController {
   async all(request: Request, response: Response, next: NextFunction) {
-    return CheepRepository.find();
+    return CheepRepository.find({
+      relations: {
+        user: true,
+      },
+    });
   }
 
   async one(request: Request, response: Response, next: NextFunction) {
@@ -11,11 +16,22 @@ export class CheepController {
       where: {
         id: parseInt(request.params.id),
       },
+      relations: {
+        user: true,
+      },
     });
   }
 
   async save(request: Request, response: Response, next: NextFunction) {
-    return CheepRepository.save(request.body);
+    const user = await UserRepository.findOneBy({
+      id: request.body.userID,
+    });
+
+    const newCheep = {
+      user: user,
+      content: request.body.content,
+    };
+    return CheepRepository.save(newCheep);
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {

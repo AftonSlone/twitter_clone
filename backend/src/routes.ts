@@ -1,6 +1,5 @@
 import { CheepController } from "./controller/CheepController";
 import { CheepPhotoController } from "./controller/CheepPhotoController";
-import { FollowController } from "./controller/FollowController";
 import { LikesController } from "./controller/LikesController";
 import { RecheepController } from "./controller/RecheepController";
 import { ReplyController } from "./controller/ReplyController";
@@ -126,30 +125,6 @@ export const Routes = [
     method: "delete",
     route: "/likes/:id",
     controller: LikesController,
-    action: "remove",
-  },
-  {
-    method: "get",
-    route: "/follows",
-    controller: FollowController,
-    action: "all",
-  },
-  {
-    method: "get",
-    route: "/follows/:id",
-    controller: FollowController,
-    action: "one",
-  },
-  {
-    method: "post",
-    route: "/follows",
-    controller: FollowController,
-    action: "save",
-  },
-  {
-    method: "delete",
-    route: "/follows/:id",
-    controller: FollowController,
     action: "remove",
   },
   {
