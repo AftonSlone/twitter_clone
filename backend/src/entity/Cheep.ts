@@ -4,30 +4,32 @@ import {
   Column,
   ManyToOne,
   OneToMany,
-} from "typeorm";
-import { Auditable } from "./Auditable";
-import { CheepPhoto } from "./CheepPhoto";
-import { Recheep } from "./Recheep";
-import { Reply } from "./Reply";
-import { User } from "./User";
+} from 'typeorm';
+import { Auditable } from './Auditable';
+import { CheepPhoto } from './CheepPhoto';
+import { Recheep } from './Recheep';
+import { User } from './User';
 
 @Entity()
 export class Cheep extends Auditable {
   @PrimaryGeneratedColumn()
   id: number;
-  
+
   @Column()
   content: string;
 
-  @ManyToOne(() => User, (user) => user.cheeps)
+  @ManyToOne(() => Cheep, cheep => cheep.replies)
+  replyTo: Cheep;
+
+  @ManyToOne(() => User, user => user.cheeps)
   user: User;
 
-  @OneToMany(() => CheepPhoto, (cheepPhoto) => cheepPhoto.cheep)
+  @OneToMany(() => CheepPhoto, cheepPhoto => cheepPhoto.cheep)
   photos: CheepPhoto[];
 
-  @OneToMany(() => Reply, (reply) => reply.cheep)
-  replies: Reply[];
+  @OneToMany(() => Cheep, reply => reply.replyTo)
+  replies: Cheep[];
 
-  @OneToMany(() => Recheep, (recheep) => recheep.cheep)
+  @OneToMany(() => Recheep, recheep => recheep.cheep)
   recheeps: Recheep;
 }
