@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import UserRepository from "../repository/UserRepository";
+import { hash } from "bcrypt";
 
 export class UserController {
   async all(request: Request, response: Response, next: NextFunction) {
@@ -26,7 +27,9 @@ export class UserController {
   }
 
   async save(request: Request, response: Response, next: NextFunction) {
-    return UserRepository.save(request.body);
+    const hashedPassword = await hash(request.body.password, 10);
+    const newUser = await { ...request.body, password: hashedPassword };
+    return UserRepository.save(newUser);
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {

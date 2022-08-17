@@ -19,8 +19,8 @@ export class User extends Auditable {
   id: number;
 
   @Column({ unique: true })
-  @IsUsername()
-  userName: string;
+  // @IsUsername()
+  password: string;
 
   @Column({ nullable: true })
   firstName: string;
