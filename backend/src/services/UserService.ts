@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import UserRepository from "../repository/UserRepository";
 import { hash } from "bcrypt";
 
-export class UserController {
+export class UserService {
   async all(request: Request, response: Response, next: NextFunction) {
     return UserRepository.find({
       relations: {

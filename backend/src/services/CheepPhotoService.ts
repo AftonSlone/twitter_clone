@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
-import RecheepRepository from "../repository/RecheepRepository";
+import CheepPhotoRepository from "../repository/CheepPhotoRepository";
 
-export class RecheepController {
+export class CheepPhotoService {
   async all(request: Request, response: Response, next: NextFunction) {
-    return RecheepRepository.find();
+    return CheepPhotoRepository.find();
   }
 
   async one(request: Request, response: Response, next: NextFunction) {
-    return RecheepRepository.findOne({
+    return CheepPhotoRepository.findOne({
       where: {
         id: parseInt(request.params.id),
       },
@@ -15,14 +15,14 @@ export class RecheepController {
   }
 
   async save(request: Request, response: Response, next: NextFunction) {
-    return RecheepRepository.save(request.body);
+    return CheepPhotoRepository.save(request.body);
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {
-    const recheepToRemove = await RecheepRepository.findOneBy({
+    const cheepPhotoToRemove = await CheepPhotoRepository.findOneBy({
       id: parseInt(request.params.id),
     });
-    if (recheepToRemove) throw new Error("This Recheep was not found");
-    await RecheepRepository.remove(recheepToRemove);
+    if (cheepPhotoToRemove) throw new Error("This CheepPhoto was not found");
+    await CheepPhotoRepository.remove(cheepPhotoToRemove);
   }
 }

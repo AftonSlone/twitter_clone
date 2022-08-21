@@ -3,7 +3,7 @@ import UserRepository from "../repository/UserRepository";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
-export class LoginController {
+export class LoginService {
   async login(request: Request, response: Response, next: NextFunction) {
     const user = await UserRepository.findOneBy({
       email: request.body.email,

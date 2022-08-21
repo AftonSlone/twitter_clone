@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import CheepRepository from "../repository/CheepRepository";
-import UserRepository from "../repository/UserRepository";
 
-export class CheepController {
+
+export class CheepService {
   async all(request: Request, response: Response, next: NextFunction) {
     return CheepRepository.find({
       relations: {

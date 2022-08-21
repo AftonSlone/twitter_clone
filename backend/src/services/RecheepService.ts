@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
-import LikesRepository from "../repository/LikesRepository";
+import RecheepRepository from "../repository/RecheepRepository";
 
-export class LikesController {
+export class RecheepService {
   async all(request: Request, response: Response, next: NextFunction) {
-    return LikesRepository.find();
+    return RecheepRepository.find();
   }
 
   async one(request: Request, response: Response, next: NextFunction) {
-    return LikesRepository.findOne({
+    return RecheepRepository.findOne({
       where: {
         id: parseInt(request.params.id),
       },
@@ -15,14 +15,14 @@ export class LikesController {
   }
 
   async save(request: Request, response: Response, next: NextFunction) {
-    return LikesRepository.save(request.body);
+    return RecheepRepository.save(request.body);
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {
-    const likesToRemove = await LikesRepository.findOneBy({
+    const recheepToRemove = await RecheepRepository.findOneBy({
       id: parseInt(request.params.id),
     });
-    if (likesToRemove) throw new Error("This Likes was not found");
-    await LikesRepository.remove(likesToRemove);
+    if (recheepToRemove) throw new Error("This Recheep was not found");
+    await RecheepRepository.remove(recheepToRemove);
   }
 }
