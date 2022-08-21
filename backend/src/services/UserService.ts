@@ -27,6 +27,15 @@ export class UserService {
   }
 
   async save(request: Request, response: Response, next: NextFunction) {
+    // if (request.method === "PUT") {
+    //   const updatedUser = {
+    //     ...request.body.user,
+    //     email: request.body.email,
+    //     password: request.body.password,
+    //     firstName: request.body.firstName,
+    //     lastName: request.body.lastName,
+    //   };
+    // }
     const hashedPassword = await hash(request.body.password, 10);
     const newUser = await { ...request.body, password: hashedPassword };
     return UserRepository.save(newUser);
