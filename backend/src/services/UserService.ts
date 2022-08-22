@@ -1,6 +1,7 @@
-import { NextFunction, Request, Response } from "express";
-import UserRepository from "../repository/UserRepository";
-import { hash } from "bcrypt";
+import { NextFunction, Request, Response } from 'express';
+import UserRepository from '../repository/UserRepository';
+import { hash } from 'bcrypt';
+import { User } from '../entity/User';
 
 export class UserService {
   async all(request: Request, response: Response, next: NextFunction) {
@@ -26,17 +27,19 @@ export class UserService {
     });
   }
 
-  async save(request: Request, response: Response, next: NextFunction) {
-    // if (request.method === "PUT") {
-    //   const updatedUser = {
-    //     ...request.body.user,
-    //     email: request.body.email,
-    //     password: request.body.password,
-    //     firstName: request.body.firstName,
-    //     lastName: request.body.lastName,
-    //   };
-    // }
-    const newUser = await { ...request.body };
+  async save(user: User) {
+    let newUser = new User();
+    if (user.id) {
+      newUser = await UserRepository.findOneBy({
+        id: user.id,
+      });
+    } else {
+      newUser.password = await hash(user.password, 10);
+    }
+    newUser.email = user.email;
+    newUser.firstName = user.firstName;
+    newUser.lastName = user.lastName;
+
     return UserRepository.save(newUser);
   }
 
@@ -44,7 +47,7 @@ export class UserService {
     const userToRemove = await UserRepository.findOneBy({
       id: parseInt(request.params.id),
     });
-    if (userToRemove) throw new Error("This User was not found");
+    if (userToRemove) throw new Error('This User was not found');
     await UserRepository.remove(userToRemove);
   }
 }
