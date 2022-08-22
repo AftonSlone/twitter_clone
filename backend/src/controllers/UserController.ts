@@ -48,8 +48,9 @@ userRouter.put(
   "/:id",
   verifyToken,
   async (request: Request, response: Response, next: NextFunction) => {
-    if (request.body.decoded.id === request.params.id) {
+    if (request.body.decoded.id === parseInt(request.params.id)) {
       request.body.id = request.params.id;
+      delete request.body.decoded;
       try {
         const results = await userService.save(request, response, next);
         response.json(results);
@@ -58,6 +59,18 @@ userRouter.put(
       }
     } else {
       next(new Error("not authorized to update this user"));
+    }
+  }
+);
+
+userRouter.post(
+  "/",
+  async (request: Request, response: Response, next: NextFunction) => {
+    try {
+      const results = await userService.save(request, response, next);
+      response.json(results);
+    } catch (e) {
+      next(e);
     }
   }
 );

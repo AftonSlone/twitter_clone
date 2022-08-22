@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
-import { TOKEN_SECERT } from "../config";
+
 
 export function verifyToken(
   request: Request,

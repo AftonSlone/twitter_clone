@@ -36,8 +36,7 @@ export class UserService {
     //     lastName: request.body.lastName,
     //   };
     // }
-    const hashedPassword = await hash(request.body.password, 10);
-    const newUser = await { ...request.body, password: hashedPassword };
+    const newUser = await { ...request.body };
     return UserRepository.save(newUser);
   }
 
