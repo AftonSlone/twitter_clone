@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { verifyToken } from "../customMiddleware/Authorization";
 import { LoginService } from "../services/LoginService";
 
 export const loginRouter = Router();

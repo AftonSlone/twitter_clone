@@ -19,7 +19,7 @@ userRouter.get(
 );
 
 userRouter.get(
-  ':id',
+  '/:id',
   verifyToken,
   async (request: Request, response: Response, next: NextFunction) => {
     try {
@@ -32,7 +32,7 @@ userRouter.get(
 );
 
 userRouter.delete(
-  ':id',
+  '/:id',
   verifyToken,
   async (request: Request, response: Response, next: NextFunction) => {
     try {
