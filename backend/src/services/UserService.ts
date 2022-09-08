@@ -1,10 +1,10 @@
-import { NextFunction, Request, Response } from 'express';
-import UserRepository from '../repository/UserRepository';
-import { hash } from 'bcrypt';
-import { User } from '../entity/User';
+import { NextFunction, Request, Response } from "express";
+import UserRepository from "../repository/UserRepository";
+import { hash } from "bcrypt";
+import { User } from "../entity/User";
 
 export class UserService {
-  async all(request: Request, response: Response, next: NextFunction) {
+  async all() {
     return UserRepository.find({
       relations: {
         cheeps: true,
@@ -14,10 +14,10 @@ export class UserService {
     });
   }
 
-  async one(request: Request, response: Response, next: NextFunction) {
+  async one(id: number) {
     return UserRepository.findOne({
       where: {
-        id: parseInt(request.params.id),
+        id,
       },
       relations: {
         cheeps: true,
@@ -43,11 +43,11 @@ export class UserService {
     return UserRepository.save(newUser);
   }
 
-  async remove(request: Request, response: Response, next: NextFunction) {
+  async remove(id: number) {
     const userToRemove = await UserRepository.findOneBy({
-      id: parseInt(request.params.id),
+      id,
     });
-    if (userToRemove) throw new Error('This User was not found');
+    if (userToRemove) throw new Error("This User was not found");
     await UserRepository.remove(userToRemove);
   }
 }

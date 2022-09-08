@@ -8,7 +8,10 @@ loginRouter.post(
   "/",
   async (request: Request, response: Response, next: NextFunction) => {
     try {
-      const results = await loginService.login(request, response, next);
+      const results = await loginService.login(
+        request.body.email,
+        request.body.password
+      );
       response.json(results);
     } catch (e) {
       next(e);

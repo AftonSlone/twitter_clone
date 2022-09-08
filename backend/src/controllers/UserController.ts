@@ -1,16 +1,16 @@
-import { NextFunction, Request, Response, Router } from 'express';
-import { verifyToken } from '../customMiddleware/Authorization';
-import { UserService } from '../services/UserService';
+import { NextFunction, Request, Response, Router } from "express";
+import { verifyToken } from "../customMiddleware/Authorization";
+import { UserService } from "../services/UserService";
 
 export const userRouter = Router();
 const userService = new UserService();
 
 userRouter.get(
-  '/',
+  "/",
   verifyToken,
   async (request: Request, response: Response, next: NextFunction) => {
     try {
-      const results = await userService.all(request, response, next);
+      const results = await userService.all();
       response.json(results);
     } catch (e) {
       next(e);
@@ -19,11 +19,11 @@ userRouter.get(
 );
 
 userRouter.get(
-  '/:id',
+  "/:id",
   verifyToken,
   async (request: Request, response: Response, next: NextFunction) => {
     try {
-      const results = await userService.one(request, response, next);
+      const results = await userService.one(parseInt(request.params.id));
       response.json(results);
     } catch (e) {
       next(e);
@@ -32,11 +32,11 @@ userRouter.get(
 );
 
 userRouter.delete(
-  '/:id',
+  "/:id",
   verifyToken,
   async (request: Request, response: Response, next: NextFunction) => {
     try {
-      const results = await userService.remove(request, response, next);
+      const results = await userService.remove(parseInt(request.params.id));
       response.json(results);
     } catch (e) {
       next(e);
@@ -45,7 +45,7 @@ userRouter.delete(
 );
 
 userRouter.put(
-  '/:id',
+  "/:id",
   verifyToken,
   async (request: Request, response: Response, next: NextFunction) => {
     if (request.body.decoded.id === parseInt(request.params.id)) {
@@ -57,13 +57,13 @@ userRouter.put(
         next(e);
       }
     } else {
-      next(new Error('not authorized to update this user'));
+      next(new Error("not authorized to update this user"));
     }
   }
 );
 
 userRouter.post(
-  '/',
+  "/",
   async (request: Request, response: Response, next: NextFunction) => {
     try {
       const results = await userService.save(request.body);

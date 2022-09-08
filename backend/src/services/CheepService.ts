@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
+import { User } from "../entity/User";
 import CheepRepository from "../repository/CheepRepository";
 
-
 export class CheepService {
-  async all(request: Request, response: Response, next: NextFunction) {
+  async all() {
     return CheepRepository.find({
       relations: {
         user: true,
@@ -12,28 +12,30 @@ export class CheepService {
     });
   }
 
-  async one(request: Request, response: Response, next: NextFunction) {
-    return CheepRepository.findOne({
+  async one(id: number) {
+    const cheep = CheepRepository.findOne({
       where: {
-        id: parseInt(request.params.id),
+        id,
       },
       relations: {
         user: true,
       },
     });
+    if (cheep) return cheep;
+    throw new Error(`Cheep with id ${id} not found!`);
   }
 
-  async save(request: Request, response: Response, next: NextFunction) {
+  async save(user: User, content: string) {
     const newCheep = {
-      user: request.body.decoded,
-      content: request.body.content,
+      user,
+      content,
     };
     return CheepRepository.save(newCheep);
   }
 
-  async remove(request: Request, response: Response, next: NextFunction) {
+  async remove(id: number) {
     const cheepToRemove = await CheepRepository.findOneBy({
-      id: parseInt(request.params.id),
+      id,
     });
     if (cheepToRemove) throw new Error("This Cheep was not found");
     await CheepRepository.remove(cheepToRemove);
