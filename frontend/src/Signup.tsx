@@ -2,37 +2,55 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const Login = () => {
+const Signup = () => {
   return (
     <Container>
       <Form>
+        <Form.Group controlId="username">
+          <Form.FloatingLabel
+            controlId="username"
+            label="Username"
+            className="mb-3"
+          >
+            <Form.Control type="text" placeholder="" />
+          </Form.FloatingLabel>
+        </Form.Group>
+
         <Form.Group controlId="email">
           <Form.FloatingLabel
-            controlId="floatingInput"
+            controlId="email"
             label="Email address"
             className="mb-3"
           >
             <Form.Control type="email" placeholder="name@example.com" />
           </Form.FloatingLabel>
         </Form.Group>
+
         <Form.Group controlId="password">
           <Form.FloatingLabel
-            controlId="floatingPassword"
+            controlId="password"
             label="Password"
             className="mb-3"
           >
             <Form.Control type="password" placeholder="Password" />
           </Form.FloatingLabel>
         </Form.Group>
+
+        <Form.Group controlId="confirmPassword">
+          <Form.FloatingLabel
+            controlId="confirmPassword"
+            label="Confirm Password"
+            className="mb-3"
+          >
+            <Form.Control type="password" placeholder="Confirm Password" />
+          </Form.FloatingLabel>
+        </Form.Group>
         <Button variant="primary" type="submit">
-          Login
-        </Button>
-        <Button variant="primary" type="button">
-          Demo Login
+          Signup
         </Button>
       </Form>
     </Container>
   );
 };
 
-export default Login;
+export default Signup;
