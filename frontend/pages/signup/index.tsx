@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const Signup = () => {
+const index = () => {
   return (
     <Container>
       <Form>
@@ -12,7 +12,7 @@ const Signup = () => {
             label="Username"
             className="mb-3"
           >
-            <Form.Control type="text" placeholder="" />
+            <Form.Control type="text" placeholder="Username" />
           </Form.FloatingLabel>
         </Form.Group>
 
@@ -53,4 +53,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default index;

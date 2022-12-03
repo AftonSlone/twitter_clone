@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const Login = () => {
+const index = () => {
   return (
     <Container>
       <Form>
@@ -35,4 +35,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default index;
