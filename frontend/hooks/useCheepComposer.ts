@@ -5,7 +5,8 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 const useCheepComposer = (): [
   (e: ChangeEvent<HTMLInputElement>) => void,
   (e: ChangeEvent<HTMLInputElement>) => void,
-  () => Promise<void>
+  () => Promise<void>,
+  newCheep
 ] => {
   const [newCheep, setNewCheep] = useState<newCheep>({
     content: "",
@@ -30,7 +31,7 @@ const useCheepComposer = (): [
       content: e.target.value,
     }));
   };
-  return [addPhoto, addContent, postNewCheep];
+  return [addPhoto, addContent, postNewCheep, newCheep];
 };
 
 export default useCheepComposer;

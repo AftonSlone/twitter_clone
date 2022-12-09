@@ -1,16 +1,15 @@
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
+import useCheepComposer from "../hooks/useCheepComposer";
 
 const CheepComposer = () => {
-  const [content, setContent] = useState("");
-  const [image, setImage] = useState(null);
-  const [errors, setErrors] = useState(null);
+  const [addPhoto, addContent, postNewCheep, newCheep] = useCheepComposer();
 
   const submitCheep = (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   return (
     <Container>
@@ -24,8 +23,8 @@ const CheepComposer = () => {
             <Form.Control
               as="textarea"
               placeholder="What's Happening"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
+              value={newCheep.content}
+              onChange={addContent}
               style={{ height: "100px" }}
             />
           </Form.FloatingLabel>
