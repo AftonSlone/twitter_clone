@@ -1,16 +1,20 @@
 import { ChangeEvent, useState } from "react";
 import { newCheep } from "../types";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 const useCheepComposer = (): [
   (e: ChangeEvent<HTMLInputElement>) => void,
-  (e: ChangeEvent<HTMLInputElement>) => void
+  (e: ChangeEvent<HTMLInputElement>) => void,
+  () => Promise<void>
 ] => {
-  const [image, setImage] = useState<File>();
-
   const [newCheep, setNewCheep] = useState<newCheep>({
     content: "",
     image: null,
   });
+
+  const postNewCheep = async () => {
+    await axiosWithAuth().post<newCheep>("/cheeps", newCheep);
+  };
 
   const addPhoto = (e: ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
@@ -26,7 +30,7 @@ const useCheepComposer = (): [
       content: e.target.value,
     }));
   };
-  return [addPhoto, addContent];
+  return [addPhoto, addContent, postNewCheep];
 };
 
 export default useCheepComposer;
