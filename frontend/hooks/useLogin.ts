@@ -1,7 +1,12 @@
 import { ChangeEvent, useState } from "react";
 import { loginCredentials } from "../types";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
-const useLogin = (): [loginCredentials, (e: ChangeEvent<HTMLInputElement>) => void] => {
+const useLogin = (): [
+  loginCredentials,
+  (e: ChangeEvent<HTMLInputElement>) => void,
+  () => Promise<void>
+] => {
   const [loginCredentials, setLoginCredentials] = useState<loginCredentials>({
     email: "",
     password: "",
@@ -16,7 +21,11 @@ const useLogin = (): [loginCredentials, (e: ChangeEvent<HTMLInputElement>) => vo
     }));
   };
 
-  return [loginCredentials, onChange];
+  const login = async () => {
+    await axiosWithAuth().post<loginCredentials>("/login", loginCredentials);
+  };
+
+  return [loginCredentials, onChange, login];
 };
 
 export default useLogin;
