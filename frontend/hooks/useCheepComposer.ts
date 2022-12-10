@@ -8,6 +8,7 @@ const useCheepComposer = (): [
   () => Promise<void>,
   newCheep
 ] => {
+  
   const [newCheep, setNewCheep] = useState<newCheep>({
     content: "",
     image: null,
