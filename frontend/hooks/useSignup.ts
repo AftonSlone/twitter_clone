@@ -1,4 +1,3 @@
-import axios, { isAxiosError } from "axios";
 import { ChangeEvent, useState } from "react";
 import { signupInfo } from "../types";
 import axiosWithAuth from "../utils/axiosWithAuth";
@@ -10,6 +9,7 @@ const useSignup = (): [
 ] => {
   const [signupInfo, setSignupInfo] = useState<signupInfo>({
     username: "",
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -27,7 +27,7 @@ const useSignup = (): [
   const onSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (signupInfo.password === signupInfo.confirmPassword) {
-      await axios.post("http://localhost:3000/users", signupInfo);
+      await axiosWithAuth().post("/users", signupInfo);
     }
   };
 

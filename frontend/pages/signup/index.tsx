@@ -9,6 +9,18 @@ const index = () => {
   return (
     <Container>
       <Form onSubmit={onSubmit}>
+        <Form.Group controlId="name">
+          <Form.FloatingLabel controlId="name" label="Name" className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="Name"
+              name="name"
+              value={signupInfo.name}
+              onChange={onChange}
+            />
+          </Form.FloatingLabel>
+        </Form.Group>
+
         <Form.Group controlId="username">
           <Form.FloatingLabel
             controlId="username"
