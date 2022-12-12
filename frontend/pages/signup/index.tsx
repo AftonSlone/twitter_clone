@@ -4,11 +4,11 @@ import Button from "react-bootstrap/Button";
 import useSignup from "../../hooks/useSignup";
 
 const index = () => {
-  const [signupInfo, onChange] = useSignup();
+  const [signupInfo, onChange, onSubmit] = useSignup();
 
   return (
     <Container>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <Form.Group controlId="username">
           <Form.FloatingLabel
             controlId="username"
@@ -18,6 +18,7 @@ const index = () => {
             <Form.Control
               type="text"
               placeholder="Username"
+              name="username"
               value={signupInfo.username}
               onChange={onChange}
             />
@@ -33,6 +34,7 @@ const index = () => {
             <Form.Control
               type="email"
               placeholder="name@example.com"
+              name="email"
               value={signupInfo.email}
               onChange={onChange}
             />
@@ -48,6 +50,7 @@ const index = () => {
             <Form.Control
               type="password"
               placeholder="Password"
+              name="password"
               value={signupInfo.password}
               onChange={onChange}
             />
@@ -63,6 +66,7 @@ const index = () => {
             <Form.Control
               type="password"
               placeholder="Confirm Password"
+              name="confirmPassword"
               value={signupInfo.confirmPassword}
               onChange={onChange}
             />
