@@ -37,8 +37,8 @@ export class UserService {
       newUser.password = await hash(user.password, 10);
     }
     newUser.email = user.email;
-    newUser.firstName = user.firstName;
-    newUser.lastName = user.lastName;
+    newUser.name = user.name;
+    newUser.username = user.username;
 
     return UserRepository.save(newUser);
   }
