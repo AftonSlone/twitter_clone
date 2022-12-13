@@ -1,6 +1,7 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as morgan from "morgan";
+import * as cors from "cors";
 import { ErrorRequestHandler } from "express";
 import { AppDataSource } from "./data-source";
 import { router } from "./routes";
@@ -15,6 +16,11 @@ AppDataSource.initialize()
     // create express app
     const app = express();
     app.use(morgan("tiny"));
+    app.use(
+      cors({
+        origin: "http://localhost:3000",
+      })
+    );
     app.use(bodyParser.json());
 
     // register express routes from defined application routes
