@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import useSignup from "../../hooks/useSignup";
 
 const index = () => {
-  const [signupInfo, onChange, onSubmit] = useSignup();
+  const [signupInfo, onChange, onSubmit, errors] = useSignup();
 
   return (
     <Container>
@@ -17,7 +17,11 @@ const index = () => {
               name="name"
               value={signupInfo.name}
               onChange={onChange}
+              isInvalid={!!errors.name}
             />
+            <Form.Control.Feedback type="invalid" tooltip>
+              {errors.name}
+            </Form.Control.Feedback>
           </Form.FloatingLabel>
         </Form.Group>
 
@@ -33,7 +37,11 @@ const index = () => {
               name="username"
               value={signupInfo.username}
               onChange={onChange}
+              isInvalid={!!errors.username}
             />
+            <Form.Control.Feedback type="invalid" tooltip>
+              {errors.username}
+            </Form.Control.Feedback>
           </Form.FloatingLabel>
         </Form.Group>
 
@@ -49,7 +57,11 @@ const index = () => {
               name="email"
               value={signupInfo.email}
               onChange={onChange}
+              isInvalid={!!errors.email}
             />
+            <Form.Control.Feedback type="invalid" tooltip>
+              {errors.email}
+            </Form.Control.Feedback>
           </Form.FloatingLabel>
         </Form.Group>
 
@@ -65,7 +77,11 @@ const index = () => {
               name="password"
               value={signupInfo.password}
               onChange={onChange}
+              isInvalid={!!errors.password}
             />
+            <Form.Control.Feedback type="invalid" tooltip>
+              {errors.password}
+            </Form.Control.Feedback>
           </Form.FloatingLabel>
         </Form.Group>
 
@@ -81,7 +97,11 @@ const index = () => {
               name="confirmPassword"
               value={signupInfo.confirmPassword}
               onChange={onChange}
+              isInvalid={!!errors.confirmPassword}
             />
+            <Form.Control.Feedback type="invalid" tooltip>
+              {errors.confirmPassword}
+            </Form.Control.Feedback>
           </Form.FloatingLabel>
         </Form.Group>
         <Button variant="primary" type="submit">
