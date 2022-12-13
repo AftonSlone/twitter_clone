@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import useSignup from "../hooks/useSignup";
 
 const SignupForm = () => {
-  const [signupInfo, onChange, onSubmit, errors] = useSignup();
+  const [signupInfo, onChange, onSubmit, errors, disabled] = useSignup();
 
   return (
     <Container>
@@ -104,7 +104,7 @@ const SignupForm = () => {
             </Form.Control.Feedback>
           </Form.FloatingLabel>
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" disabled={disabled}>
           Signup
         </Button>
       </Form>

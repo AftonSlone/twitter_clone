@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { signupErrors, signupInfo } from "../types";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
@@ -7,7 +7,8 @@ const useSignup = (): [
   signupInfo,
   (e: ChangeEvent<HTMLInputElement>) => void,
   (e: ChangeEvent<HTMLFormElement>) => Promise<void>,
-  signupErrors
+  signupErrors,
+  boolean
 ] => {
   const [signupInfo, setSignupInfo] = useState<signupInfo>({
     username: "",
@@ -25,6 +26,8 @@ const useSignup = (): [
     email: "",
   });
 
+  const [disabled, setDisabled] = useState(true);
+
   const signupValidation = yup.object().shape({
     name: yup.string().trim().required("What's your name?"),
     username: yup.string().trim().required("Please Provide valid username"),
@@ -38,9 +41,15 @@ const useSignup = (): [
       ),
     confirmPassword: yup
       .string()
-      .required("Please confirm your password")
-      .oneOf([yup.ref("password")], "Passwords must match"),
+      .required()
+      .oneOf([yup.ref("password"), null], "Passwords must match"),
   });
+
+  useEffect(() => {
+    signupValidation.isValid(signupInfo).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [signupValidation, signupInfo]);
 
   const validateChange = (e: ChangeEvent<HTMLInputElement>) => {
     yup
@@ -78,7 +87,7 @@ const useSignup = (): [
     }
   };
 
-  return [signupInfo, onChange, onSubmit, errors];
+  return [signupInfo, onChange, onSubmit, errors, disabled];
 };
 
 export default useSignup;
