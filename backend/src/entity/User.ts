@@ -1,4 +1,4 @@
-import { Contains, IsEmail, Length } from "class-validator";
+import { IsEmail } from "class-validator";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -7,7 +7,6 @@ import {
   ManyToMany,
   JoinTable,
 } from "typeorm";
-import { IsUsername } from "../customValidators/isUsername";
 import { Auditable } from "./Auditable";
 import { Cheep } from "./Cheep";
 import { Likes } from "./Likes";
@@ -19,19 +18,17 @@ export class User extends Auditable {
   id: number;
 
   @Column({ unique: true })
-  @IsUsername()
-  userName: string;
+  password: string;
 
   @Column({ nullable: true })
-  firstName: string;
+  name: string;
 
   @Column({ nullable: true })
-  lastName: string;
+  username: string;
 
   @Column({ unique: true })
   @IsEmail()
   email: string;
-
   @OneToMany(() => Cheep, (cheep) => cheep.user)
   cheeps: Cheep[];
 
