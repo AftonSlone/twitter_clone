@@ -26,13 +26,19 @@ const useSignup = (): [
   });
 
   const signupValidation = yup.object().shape({
-    name: yup.string().trim().required("Must provide valid name"),
+    name: yup.string().trim().required("What's your name?"),
     username: yup.string().trim().required("Please Provide valid username"),
     email: yup.string().email("Please Provide valid email"),
-    password: yup.string().required("Please Provide valid password"),
+    password: yup
+      .string()
+      .required("Please Provide valid password")
+      .matches(
+        /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,16}$/,
+        "The password must be at least 8 - 16 characters, contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and may contain the following special characters ($ % # * & - .)"
+      ),
     confirmPassword: yup
       .string()
-      .required("Please enter your password")
+      .required("Please confirm your password")
       .oneOf([yup.ref("password")], "Passwords must match"),
   });
 
