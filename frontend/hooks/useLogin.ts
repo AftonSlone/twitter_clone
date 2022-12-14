@@ -5,7 +5,7 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 const useLogin = (): [
   loginCredentials,
   (e: ChangeEvent<HTMLInputElement>) => void,
-  () => Promise<void>
+  (e: ChangeEvent<HTMLFormElement>) => Promise<loginCredentials>
 ] => {
   const [loginCredentials, setLoginCredentials] = useState<loginCredentials>({
     email: "",
@@ -21,11 +21,16 @@ const useLogin = (): [
     }));
   };
 
-  const login = async () => {
-    await axiosWithAuth().post<loginCredentials>("/login", loginCredentials);
+  const onSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const res = await axiosWithAuth().post<loginCredentials>(
+      "/login",
+      loginCredentials
+    );
+    return res.data;
   };
 
-  return [loginCredentials, onChange, login];
+  return [loginCredentials, onChange, onSubmit];
 };
 
 export default useLogin;
