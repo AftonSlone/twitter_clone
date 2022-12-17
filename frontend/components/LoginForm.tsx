@@ -42,9 +42,6 @@ const LoginForm = () => {
         <Button variant="primary" type="submit">
           Login
         </Button>
-        <Button variant="primary" type="button">
-          Demo Login
-        </Button>
       </Form>
     </Container>
   );

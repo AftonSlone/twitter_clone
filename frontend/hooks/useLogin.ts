@@ -5,12 +5,14 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 const useLogin = (): [
   loginCredentials,
   (e: ChangeEvent<HTMLInputElement>) => void,
-  (e: ChangeEvent<HTMLFormElement>) => Promise<loginCredentials>
+  (e: ChangeEvent<HTMLFormElement>) => Promise<void>
 ] => {
   const [loginCredentials, setLoginCredentials] = useState<loginCredentials>({
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,7 +29,7 @@ const useLogin = (): [
       "/login",
       loginCredentials
     );
-    return res.data;
+    console.log(res);
   };
 
   return [loginCredentials, onChange, onSubmit];
