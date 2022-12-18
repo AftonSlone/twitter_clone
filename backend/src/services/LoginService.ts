@@ -1,11 +1,10 @@
-import { NextFunction, Request, Response } from "express";
 import UserRepository from "../repository/UserRepository";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
 export class LoginService {
   async login(email: string, password: string) {
-    const user = await UserRepository.findOneBy({
+    const user = await UserRepository.findOneByOrFail({
       email,
     });
 
@@ -22,6 +21,5 @@ export class LoginService {
         };
       }
     }
-    return { message: "Invalid Credentials" };
   }
 }

@@ -8,7 +8,7 @@ import { router } from "./routes";
 import { port } from "./config";
 
 const handleError: ErrorRequestHandler = (err, req, res, next) => {
-  res.status(err.status || 500).send({ message: err.message });
+  res.status(err.status || 500).send(err);
 };
 
 AppDataSource.initialize()
