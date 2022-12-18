@@ -8,6 +8,11 @@ export interface loginCredentials {
   password: string;
 }
 
+export interface loginErrors {
+  email: string;
+  password: string;
+}
+
 export interface signupInfo {
   username: string;
   name: string;
