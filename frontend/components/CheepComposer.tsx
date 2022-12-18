@@ -29,6 +29,12 @@ const CheepComposer = () => {
             />
           </Form.FloatingLabel>
         </Form.Group>
+
+        <Form.Group>
+          <Form.Label>
+            <Form.Control type="file" onChange={addPhoto} accept="image/*" />
+          </Form.Label>
+        </Form.Group>
       </Form>
       <Button>Cheep</Button>
     </Container>

@@ -12,16 +12,23 @@ const useCheepComposer = (): [
     content: "",
     image: null,
   });
+  const [ajaxError, setAjaxErrors] = useState("");
 
   const postNewCheep = async () => {
-    await axiosWithAuth().post<newCheep>("/cheeps", newCheep);
+    try {
+      await axiosWithAuth().post<newCheep>("/cheeps", newCheep);
+    } catch (e: any) {
+      setAjaxErrors(e.responce.data.message);
+    }
   };
 
   const addPhoto = (e: ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
     if (fileList) {
-      setNewCheep((prevNewCheep) => ({ ...prevNewCheep, image: fileList[0] }));
-      e.target.value = "";
+      console.log(newCheep.image);
+      console.log(fileList[0]);
+      setNewCheep((prevState) => ({ ...prevState, image: fileList[0] }));
+      // e.target.value = fileList[0].name;
     }
   };
 
