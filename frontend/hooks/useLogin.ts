@@ -25,11 +25,14 @@ const useLogin = (): [
 
   const onSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await axiosWithAuth().post<loginCredentials>(
-      "/login",
-      loginCredentials
-    );
-    console.log(res);
+    try {
+      const res = await axiosWithAuth().post<loginCredentials>(
+        "/login",
+        loginCredentials
+      );
+    } catch (e: any) {
+      console.log(e.response.data.message);
+    }
   };
 
   return [loginCredentials, onChange, onSubmit];
