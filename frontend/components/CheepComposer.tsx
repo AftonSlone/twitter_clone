@@ -5,7 +5,14 @@ import { ChangeEvent } from "react";
 import useCheepComposer from "../hooks/useCheepComposer";
 
 const CheepComposer = () => {
-  const [addPhoto, addContent, postNewCheep, newCheep] = useCheepComposer();
+  const [
+    addPhoto,
+    addContent,
+    postNewCheep,
+    newCheep,
+    contentErrors,
+    disabled,
+  ] = useCheepComposer();
 
   const submitCheep = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,7 +43,9 @@ const CheepComposer = () => {
           </Form.Label>
         </Form.Group>
       </Form>
-      <Button>Cheep</Button>
+      <Button variant="primary" type="submit" disabled={disabled}>
+        Cheep
+      </Button>
     </Container>
   );
 };
