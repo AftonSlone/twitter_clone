@@ -1,9 +1,21 @@
-version: '3'
+version: "3.8"
 services:
-  postgres:
+  db:
     image: postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    container_name: db
     ports:
-      - '5432:5432'
+      - "${DB_PORT}:${DB_PORT}"
+
+  server:
+    build:
+      context: .
+      target: base
+    volumes:
+      - ./src:/home/node/app/src
+    container_name: server
+    ports:
+      - ${PORT}:${PORT}
+    command: npm run dev
