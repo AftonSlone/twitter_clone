@@ -27,3 +27,14 @@ services:
     ports:
       - ${PORT}:${PORT}
     command: npm run dev
+
+  frontend:
+    build:
+      context: ./frontend
+      target: base
+    volumes:
+      - ./frontend:/frontend
+    container_name: frontend
+    ports:
+      - 3000:3000
+    command: npm run dev
